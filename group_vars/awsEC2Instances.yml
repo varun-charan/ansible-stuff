@@ -1,0 +1,6 @@
+# awsEC2Instances.yml
+# --------------------
+#
+# Variables for EC2 instances.
+---
+ansible_ssh_private_key_file: /home/vcharun/.ssh/aws-ec2-keys/varun-ec2-keys.pem
