@@ -1,0 +1,13 @@
+---
+  - name: "Upload code to GitHub"
+    hosts: gitUploader
+    become: yes
+    vars:
+      code_source: /home/vcharun/ansible-stuff/upload-code-to-github/
+    
+    tasks:
+      - name: copy code to EC2 instance
+        copy:
+          src: "{{ code_source }}"
+          dest: /home/ec2-user/ansible-stuff/
+          mode: 0776
