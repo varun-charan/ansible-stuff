@@ -1,2 +1,2 @@
 # ansible-stuff
-Contains all the work for ANSIBLE
+Contains all the work related to Ansible
