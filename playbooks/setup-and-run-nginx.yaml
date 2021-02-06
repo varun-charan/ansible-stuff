@@ -1,58 +1,10 @@
 ---
- - name: check if required pkgs are installed on the machine
+ - name: setup nginx web server
    #hosts: localhost
    hosts: awsEC2Instances
    #connection: local   # DOES NOT create a local SSH connection to localhost. It just does what is required directly.
    become: yes
-   tags: check-req-pkgs
+   tags: setup-webserver
 
-   tasks:
-     - name: get info about all pkgs on the machine
-       package_facts:
-         manager: "auto"
-
-     - name: check if lksctp is installed
-       debug:
-         msg: "LKSCTP NOT Found"
-       when: "'lksctp-tools' not in ansible_facts.packages"
-
-     - name: check if nginx is installed
-       debug:
-         msg: "NGINX NOT Found"
-       when: "'nginx' not in ansible_facts.packages"
-
- - name: install required pkgs on the machine
-   #hosts: localhost
-   hosts: awsEC2Instances
-   #connection: local
-   become: yes
-   tags: install-req-pkgs
-
-   tasks:
-     - name: install required pkgs if not already present
-       yum:
-         name: ['lksctp-tools', 'nginx']
-         state: present
-
- - name: copy index.html to nginx server
-   #hosts: localhost
-   hosts: awsEC2Instances
-   #connection: local
-   become: yes
-   tags: copy-index-html
-
-   tasks:
-     - name: copy index.html to nginx server
-       copy:
-         src: /home/vcharun/ansible-stuff/src/index.html
-         dest: /usr/share/nginx/html/index.html
-       notify:
-         - restart nginx server
-
-   handlers:
-     - name: restart nginx server
-       service:
-         name: nginx
-         state: restarted
-
-
+   roles:
+     - webserver

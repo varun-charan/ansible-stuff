@@ -1,0 +1,21 @@
+---
+- name: get info about all pkgs on the machine
+  package_facts:
+    manager: "auto"
+
+- name: check if lksctp is installed
+  debug:
+    msg: "LKSCTP NOT Found"
+  when: "'lksctp-tools' not in ansible_facts.packages"
+
+- name: check if nginx is installed
+  debug:
+    msg: "NGINX NOT Found"
+  when: "'nginx' not in ansible_facts.packages"
+
+- name: install required pkgs if not already present
+  yum:
+    name: ['lksctp-tools', 'nginx']
+    state: present
+
+

@@ -1,0 +1,3 @@
+---
+- include: check_and_install_deps.yml
+- include: copy_code.yml
