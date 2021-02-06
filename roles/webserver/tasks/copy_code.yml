@@ -1,7 +1,7 @@
 ---
 - name: copy index.html to nginx server
-  copy:
-    src: /home/vcharun/ansible-stuff/src/index.html
+  template:
+    src: index.html
     dest: /usr/share/nginx/html/index.html
   notify:
     - restart nginx server

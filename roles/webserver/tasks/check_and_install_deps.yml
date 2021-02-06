@@ -18,4 +18,3 @@
     name: ['lksctp-tools', 'nginx']
     state: present
 
-
